@@ -71,10 +71,11 @@ function Constellation() {
   );
 }
 
-export default function Section2() {
+export default function Section2({ openedHouse, onCloseHouse }) {
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredHouse, setHoveredHouse] = useState(null);
+  const [localSelectedHouse, setLocalSelectedHouse] = useState(null);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -126,6 +127,60 @@ export default function Section2() {
   }, []);
 
   const hoveredData = hoveredHouse ? HOUSES[hoveredHouse] : null;
+  const selectedHouse = openedHouse || localSelectedHouse;
+  const selectedData = selectedHouse ? HOUSES[selectedHouse] : null;
+
+  if (selectedData) {
+    return (
+      <section
+        className="houses houses--welcome"
+        id="houses"
+        style={{ '--card-accent': selectedData.accent, '--card-accent2': selectedData.accent2, '--card-glow': selectedData.glow }}
+      >
+        <div className="house-welcome-bg" />
+        <ParticleLayer kind={selectedData.particle} count={34} />
+
+        <button
+          type="button"
+          className="house-welcome-back"
+          onClick={() => {
+            setLocalSelectedHouse(null);
+            onCloseHouse?.();
+          }}
+        >
+          Back to houses
+        </button>
+
+        <div className="house-welcome-panel">
+          <div className="house-welcome-crest">
+            <img src={selectedData.logo} alt={`${selectedData.name} crest`} />
+          </div>
+
+          <div className="house-welcome-copy">
+            <p className="house-welcome-kicker">Greetings, young wizard!</p>
+            <h2>Welcome to {selectedData.name}!</h2>
+            <p className="house-welcome-quote">"{selectedData.welcomeQuote}"</p>
+
+            <div className="house-welcome-lines">
+              {selectedData.welcomeLines.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+
+            <div className="house-welcome-blessing">
+              {selectedData.blessingLines.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+
+            <p className="house-welcome-home">Welcome home, Young Wizard.</p>
+          </div>
+        </div>
+
+        <CursorTrail activeKind={selectedData.cursor} color={selectedData.accent} />
+      </section>
+    );
+  }
 
   return (
     <section className="houses" id="houses">
@@ -137,10 +192,12 @@ export default function Section2() {
       <div className="houses-track" ref={trackRef}>
         {HOUSE_IDS.map((id, i) => {
           const houseData = HOUSES[id];
+
           return (
             <div
               key={id}
               className={`house-card house-card--${id} ${activeIndex === i ? 'is-active' : ''}`}
+              onClick={() => setLocalSelectedHouse(id)}
               onMouseEnter={() => setHoveredHouse(id)}
               onMouseLeave={() => setHoveredHouse((current) => (current === id ? null : current))}
               style={{ '--card-accent': houseData.accent, '--card-accent2': houseData.accent2, '--card-glow': houseData.glow }}
@@ -160,7 +217,14 @@ export default function Section2() {
                 <img className="house-card-logo" src={houseData.logo} alt={`${houseData.name} crest`} />
                 <h1>{houseData.name}</h1>
                 <p>{houseData.tagline}</p>
-                <button type="button" className="house-card-cta">
+                <button
+                  type="button"
+                  className="house-card-cta"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setLocalSelectedHouse(id);
+                  }}
+                >
                   Discover {houseData.name}
                 </button>
               </div>

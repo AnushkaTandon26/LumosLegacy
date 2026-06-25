@@ -48,7 +48,7 @@
 .house-card {
   position: relative;
   flex: 0 0 min(78vw, 760px);
-  height: min(60vh, 520px);
+  min-height: min(66vh, 560px);
   border-radius: 18px;
   overflow: hidden;
   scroll-snap-align: center;
@@ -128,17 +128,18 @@
   position: relative;
   z-index: 3;
   text-align: center;
-  padding: 6% 8%;
+  width: min(86%, 560px);
+  padding: 5% 6%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.4rem;
+  gap: 1.1rem;
 }
 
 .house-card-logo {
-  width: 160px;
-  height: 160px;
+  width: clamp(110px, 16vw, 160px);
+  height: clamp(110px, 16vw, 160px);
   object-fit: contain;
   margin-bottom: 0;
   filter: drop-shadow(0 0 20px var(--card-glow, rgba(255, 255, 255, 0.4)));
@@ -181,13 +182,295 @@
   transform: translateY(-2px);
 }
 
+.houses--welcome {
+  min-height: 100vh;
+  padding: 12vh 6vw 8vh;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 25% 28%, color-mix(in srgb, var(--card-accent) 38%, transparent) 0%, transparent 34%),
+    radial-gradient(circle at 78% 12%, color-mix(in srgb, var(--card-accent2) 26%, transparent) 0%, transparent 30%),
+    linear-gradient(145deg, #040506 0%, #070a12 45%, #010101 100%);
+}
+
+.houses--welcome::before,
+.houses--welcome::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.houses--welcome::before {
+  z-index: 0;
+  background:
+    linear-gradient(115deg, transparent 0%, color-mix(in srgb, var(--card-accent) 18%, transparent) 36%, transparent 55%),
+    linear-gradient(250deg, transparent 10%, color-mix(in srgb, var(--card-accent2) 16%, transparent) 48%, transparent 72%);
+  background-size: 220% 220%;
+  opacity: 0.72;
+  filter: blur(4px);
+  animation: house-aurora-flow 11s ease-in-out infinite;
+}
+
+.houses--welcome::after {
+  z-index: 1;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle, color-mix(in srgb, var(--card-accent2) 70%, #ffffff) 0 1px, transparent 2px);
+  background-size: 96px 96px, 57px 57px;
+  opacity: 0.22;
+  animation: house-star-drift 18s linear infinite;
+}
+
+.house-welcome-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.06)),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.62) 76%);
+  pointer-events: none;
+}
+
+.house-welcome-back {
+  position: relative;
+  z-index: 4;
+  align-self: flex-start;
+  margin: 0 auto 1.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.72rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.house-welcome-back:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 22px var(--card-glow, rgba(255, 255, 255, 0.35));
+  transform: translateY(-2px);
+}
+
+.house-welcome-panel {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 1040px);
+  min-height: 68vh;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  border: 1px solid color-mix(in srgb, var(--card-accent2) 34%, transparent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--card-accent) 18%, transparent), rgba(0, 0, 0, 0.35) 42%),
+    rgba(3, 4, 8, 0.72);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65), 0 0 80px var(--card-glow, rgba(255, 255, 255, 0.16));
+  backdrop-filter: blur(12px);
+  animation: house-welcome-rise 0.6s ease-out both;
+  overflow: hidden;
+}
+
+.house-welcome-panel::before,
+.house-welcome-panel::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.house-welcome-panel::before {
+  inset: 1rem;
+  border: 1px solid color-mix(in srgb, var(--card-accent2) 32%, transparent);
+  box-shadow: inset 0 0 34px color-mix(in srgb, var(--card-accent2) 18%, transparent);
+}
+
+.house-welcome-panel::after {
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.76) 0 1px, transparent 2px),
+    linear-gradient(120deg, transparent 0%, color-mix(in srgb, var(--card-accent2) 18%, transparent) 46%, transparent 64%);
+  background-size: 72px 72px, 240% 100%;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+  animation: house-panel-shimmer 8s ease-in-out infinite;
+}
+
+.house-welcome-crest {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.house-welcome-crest::before {
+  content: '';
+  position: absolute;
+  width: clamp(190px, 28vw, 330px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--card-accent2) 38%, transparent);
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, transparent 0deg 12deg, color-mix(in srgb, var(--card-accent2) 20%, transparent) 12deg 14deg);
+  box-shadow: 0 0 38px var(--card-glow, rgba(255, 255, 255, 0.24));
+  animation: house-halo-spin 18s linear infinite;
+}
+
+.house-welcome-crest img {
+  position: relative;
+  z-index: 1;
+  width: clamp(160px, 24vw, 280px);
+  height: clamp(160px, 24vw, 280px);
+  object-fit: contain;
+  filter: drop-shadow(0 0 34px var(--card-glow, rgba(255, 255, 255, 0.45)));
+  animation: house-crest-float 3.6s ease-in-out infinite;
+}
+
+.house-welcome-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.house-welcome-kicker,
+.house-welcome-quote,
+.house-welcome-lines p,
+.house-welcome-blessing p,
+.house-welcome-home {
+  font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  color: rgba(255, 250, 238, 0.94);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.house-welcome-kicker {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  letter-spacing: 0.04em;
+}
+
+.house-welcome-copy h2 {
+  margin: 0;
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-size: clamp(2.35rem, 6vw, 5.2rem);
+  color: #ffffff;
+  text-shadow: 0 0 34px var(--card-glow, rgba(255, 255, 255, 0.35)), 0 3px 16px rgba(0, 0, 0, 0.8);
+}
+
+.house-welcome-quote {
+  margin: 1.1rem 0 1.9rem;
+  color: var(--card-accent2, #f3d382);
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  font-style: italic;
+}
+
+.house-welcome-lines,
+.house-welcome-blessing {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.house-welcome-lines p,
+.house-welcome-blessing p {
+  margin: 0;
+  font-size: clamp(1rem, 1.55vw, 1.28rem);
+  line-height: 1.5;
+}
+
+.house-welcome-blessing {
+  margin-top: 1.55rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--card-accent2, #f3d382);
+}
+
+.house-welcome-home {
+  margin: 1.9rem 0 0;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.42rem);
+  color: #ffffff;
+  letter-spacing: 0.05em;
+}
+
+@keyframes house-welcome-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes house-crest-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes house-panel-shimmer {
+  0%, 100% {
+    background-position: 0 0, 0% 0;
+  }
+
+  50% {
+    background-position: 72px 72px, 100% 0;
+  }
+}
+
+@keyframes house-halo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes house-aurora-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes house-star-drift {
+  to {
+    background-position: 96px 96px, -57px 57px;
+  }
+}
+
 @media (max-width: 820px) {
   .house-card {
     flex: 0 0 82vw;
-    height: 60vh;
+    min-height: 68vh;
   }
 
   .houses-track {
     padding: 2vh 9vw 4vh;
+  }
+
+  .house-card-content {
+    gap: 0.85rem;
+  }
+
+  .houses--welcome {
+    padding: 10vh 5vw 6vh;
+  }
+
+  .house-welcome-panel {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .house-welcome-blessing {
+    text-align: left;
   }
 }
