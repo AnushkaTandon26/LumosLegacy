@@ -1,0 +1,56 @@
+.cursor-trail {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+}
+
+.cursor-particle {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f3d382;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.cursor-particle--embers {
+  animation: cursor-embers 0.8s ease-out forwards;
+}
+
+.cursor-particle--smoke {
+  width: 10px;
+  height: 10px;
+  filter: blur(2px);
+  animation: cursor-smoke 0.9s ease-out forwards;
+}
+
+.cursor-particle--stars {
+  animation: cursor-stars 0.7s ease-out forwards;
+}
+
+.cursor-particle--fireflies {
+  animation: cursor-fireflies 0.9s ease-in-out forwards;
+}
+
+@keyframes cursor-embers {
+  0% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -150%) scale(0.4); }
+}
+
+@keyframes cursor-smoke {
+  0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -120%) scale(2); }
+}
+
+@keyframes cursor-stars {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+}
+
+@keyframes cursor-fireflies {
+  0% { opacity: 0.9; transform: translate(-50%, -50%) translateX(0); }
+  50% { transform: translate(-50%, -50%) translateX(8px); }
+  100% { opacity: 0; transform: translate(-50%, -50%) translateX(-8px); }
+}

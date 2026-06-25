@@ -1,0 +1,48 @@
+export const HOUSES = {
+  gryffindor: {
+    name: 'Gryffindor',
+    accent: '#c8102e',
+    accent2: '#eeba30',
+    glow: 'rgba(238, 186, 48, 0.55)',
+    particle: 'embers',
+    cursor: 'embers',
+    tagline: 'Where courage lights the way.',
+    silhouette: 'none',
+    logo: '/images/house1.png',
+  },
+  slytherin: {
+    name: 'Slytherin',
+    accent: '#1a472a',
+    accent2: '#aaaaaa',
+    glow: 'rgba(94, 189, 138, 0.45)',
+    particle: 'smoke',
+    cursor: 'smoke',
+    tagline: 'Ambition coiled in shadow.',
+    silhouette: 'snake',
+    logo: '/images/house2.png',
+  },
+  ravenclaw: {
+    name: 'Ravenclaw',
+    accent: '#0e1a40',
+    accent2: '#946b2d',
+    glow: 'rgba(94, 140, 222, 0.5)',
+    particle: 'stars',
+    cursor: 'stars',
+    tagline: 'Wit beyond measure.',
+    silhouette: 'books',
+    logo: '/images/house3.png',
+  },
+  hufflepuff: {
+    name: 'Hufflepuff',
+    accent: '#ecb939',
+    accent2: '#372e29',
+    glow: 'rgba(255, 200, 90, 0.55)',
+    particle: 'fireflies',
+    cursor: 'fireflies',
+    tagline: 'Loyalty, warm as candlelight.',
+    silhouette: 'lantern',
+    logo: '/images/house4.png',
+  },
+};
+
+export const HOUSE_IDS = Object.keys(HOUSES);

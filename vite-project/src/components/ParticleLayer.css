@@ -1,0 +1,96 @@
+.particle-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  top: 100%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--particle-color, #f3d382);
+  opacity: 0;
+}
+
+/* dust: slow gentle upward drift, soft fade */
+.particle-layer--dust .particle {
+  box-shadow: 0 0 6px var(--particle-color, #f3d382);
+  animation-name: particle-dust;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* embers: faster rise with flicker */
+.particle-layer--embers .particle {
+  background: var(--particle-color, #eeba30);
+  box-shadow: 0 0 8px var(--particle-color, #eeba30);
+  animation-name: particle-embers;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+/* smoke: wide soft drifting blobs */
+.particle-layer--smoke .particle {
+  width: 14px;
+  height: 14px;
+  filter: blur(3px);
+  background: var(--particle-color, #5ebd8a);
+  box-shadow: none;
+  animation-name: particle-smoke;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* stars: twinkle in place, minimal vertical drift */
+.particle-layer--stars .particle {
+  background: var(--particle-color, #5e8cde);
+  box-shadow: 0 0 6px var(--particle-color, #5e8cde);
+  animation-name: particle-stars;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* fireflies: erratic horizontal float */
+.particle-layer--fireflies .particle {
+  background: var(--particle-color, #ffc85a);
+  box-shadow: 0 0 8px var(--particle-color, #ffc85a);
+  animation-name: particle-fireflies;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes particle-dust {
+  0% { opacity: 0; top: 100%; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { opacity: 0; top: -10%; }
+}
+
+@keyframes particle-embers {
+  0% { opacity: 0; top: 100%; transform: translateX(0); }
+  15% { opacity: 1; }
+  100% { opacity: 0; top: -15%; transform: translateX(12px); }
+}
+
+@keyframes particle-smoke {
+  0% { opacity: 0; top: 95%; transform: translateX(0) scale(1); }
+  30% { opacity: 0.35; }
+  100% { opacity: 0; top: 10%; transform: translateX(30px) scale(1.6); }
+}
+
+@keyframes particle-stars {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes particle-fireflies {
+  0% { opacity: 0; top: 80%; transform: translateX(0); }
+  20% { opacity: 0.9; }
+  50% { transform: translateX(-20px); }
+  80% { transform: translateX(15px); }
+  100% { opacity: 0; top: 20%; transform: translateX(0); }
+}

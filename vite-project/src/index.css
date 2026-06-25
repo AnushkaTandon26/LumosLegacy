@@ -1,0 +1,53 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  cursor: url('/wand-cursor.svg') 4 4, auto;
+}
+
+a, button, [role="button"] {
+  cursor: url('/wand-cursor.svg') 4 4, pointer;
+}
+
+:root,
+[data-house="default"] {
+  --accent: #f3d382;
+  --accent2: #eeba30;
+  --glow: rgba(243, 211, 130, 0.45);
+  --bg-deep: #050402;
+  --particle-color: #f3d382;
+}
+
+[data-house="gryffindor"] {
+  --accent: #eeba30;
+  --accent2: #c8102e;
+  --glow: rgba(238, 186, 48, 0.55);
+  --bg-deep: #1a0a0a;
+  --particle-color: #eeba30;
+}
+
+[data-house="slytherin"] {
+  --accent: #5ebd8a;
+  --accent2: #1a472a;
+  --glow: rgba(94, 189, 138, 0.45);
+  --bg-deep: #07120a;
+  --particle-color: #5ebd8a;
+}
+
+[data-house="ravenclaw"] {
+  --accent: #946b2d;
+  --accent2: #5e8cde;
+  --glow: rgba(94, 140, 222, 0.5);
+  --bg-deep: #060b1a;
+  --particle-color: #5e8cde;
+}
+
+[data-house="hufflepuff"] {
+  --accent: #ecb939;
+  --accent2: #372e29;
+  --glow: rgba(255, 200, 90, 0.55);
+  --bg-deep: #1a1106;
+  --particle-color: #ffc85a;
+}
